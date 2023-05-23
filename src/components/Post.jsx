@@ -1,4 +1,5 @@
-import styles from './Post.module.css'
+import { Comment } from './Comment';
+import styles from './Post.module.css';
 
 export function Post() {
     return (
@@ -36,6 +37,12 @@ export function Post() {
              <button type='submit'>Publicar</button>
            </footer>
          </form>
-        </article>
-    )
+
+     <div className={styles.commentList}>
+      <Comment />
+      <Comment />
+      <Comment />
+     </div>
+   </article>
+  )
 }
