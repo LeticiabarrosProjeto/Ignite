@@ -33,7 +33,11 @@ const [comments, setComments] = useState([
 
     }
     function handleNewCommenteChange() {
+      event.target.setCustomValidity('');
       setNewCommentText(event.target.value);//Programação declarativa 
+    }
+    function handleNewCommentInvalid() {
+       event.target.setCustomValidity('Esse campo é obrigatório!');
     }
 
     function deleteComment(commentToDelete) {
@@ -44,6 +48,7 @@ const [comments, setComments] = useState([
     })
          setComments(commentsWithoutDeleteOne);
     }
+    const isNewCommentEmpty = newCommentText.length == 0;
 
     return (
         <article className={styles.post}>
@@ -79,9 +84,12 @@ const [comments, setComments] = useState([
            placeholder='Deixe um comentário'
            value={newCommentText} //Programação declarativa 
            onChange={handleNewCommenteChange}
+           onInvalid={handleNewCommentInvalid}
+           required
            />
            <footer>
-             <button type='submit'>Publicar</button>
+             <button type='submit' disabled={isNewCommentEmpty}>
+              Publicar</button>
            </footer>
          </form>
 
