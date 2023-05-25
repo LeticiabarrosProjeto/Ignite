@@ -36,6 +36,15 @@ const [comments, setComments] = useState([
       setNewCommentText(event.target.value);//Programação declarativa 
     }
 
+    function deleteComment(commentToDelete) {
+    //imutabilidade -> as viariáveis não sofrem mutação, nós criamos um novo valor (um novo espaço na memorária)
+    //criar um novo valor na memória é mais performatico no react do que consultar e alterar um valor que já existe
+    const commentsWithoutDeleteOne = comments.filter(comment => {
+      return comment !== commentToDelete; 
+    })
+         setComments(commentsWithoutDeleteOne);
+    }
+
     return (
         <article className={styles.post}>
             <header>
@@ -78,7 +87,13 @@ const [comments, setComments] = useState([
 
      <div className={styles.commentList}>
         {comments.map(comment => {
-          return <Comment key={comment} content={comment}/>
+          return (
+          <Comment 
+          key={comment} 
+          content={comment}
+          onDeleteComment={deleteComment} //comunicação entre componentes passando função como propriedade 
+          />
+          )
         })}
      </div>
    </article>
